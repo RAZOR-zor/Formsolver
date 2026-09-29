@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Form Solver",
+  "short_name": "Form Solver",
+  "version": "3.0.0",
+  "description": "Isi Google Form otomatis dengan AI. analyses soal, menjawab, lalu mengisi field untuk Anda.",
+  "minimum_chrome_version": "116",
+  "permissions": ["activeTab", "storage"],
+  "host_permissions": [
+    "https://api.xkiro.com/*",
+    "https://*.googleusercontent.com/*"
+  ],
+  "background": {
+    "service_worker": "sw.js"
+  },
+  "action": {
+    "default_title": "Form Solver — tampilkan / sembunyikan widget",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/forms/*",
+        "https://forms.gle/*"
+      ],
+      "js": ["content.js", "providers.js", "widget.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["widget.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
